@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let question of questions">
+		<i mat-list-icon class="{{question.icon === 'none' ? 'material-icons' : question.icon}} icon">{{question.icon === 'none' ? 'help' : ''}}</i>
+    <h3 mat-line>{{question.title}}</h3>
+    <p mat-line>
+			<small>{{question.answers.length}} respuestas - {{question.createdAt | amLocale: 'es' | amTimeAgo}}</small>
+		</p>
+  </mat-list-item>
+</mat-list>
