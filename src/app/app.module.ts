@@ -11,17 +11,21 @@ import 'hammerjs';
 
 // Modules
 import { MomentModule } from 'ngx-moment';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { QuestionDetailComponent } from './question/question-detail.component';
 import { AnswerFormComponent } from './answer/answer-form.component';
+import { SigninScreenComponent } from './auth/signin-screen.component';
+import { SignupScreenComponent } from './auth/signup/signup-screen.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionDetailComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    SigninScreenComponent,
+    SignupScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,8 @@ import { AnswerFormComponent } from './answer/answer-form.component';
     BrowserAnimationsModule,
     MaterialModule,
     MomentModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

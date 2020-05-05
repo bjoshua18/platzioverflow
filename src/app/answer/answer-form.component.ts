@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Answer, User } from './answer.model';
+import { Answer } from './answer.model';
 import { Question } from '../question/question.model';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-answer-form',
@@ -18,7 +19,7 @@ export class AnswerFormComponent {
       form.value.description,
       this.question,
       new Date(),
-      new User('Paula', 'Becerra')
+      new User(null, null, 'Paula', 'Becerra')
     );
     // La agregamos al principio de la lista de respuesta
     this.question.answers.unshift(answer);
