@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Question } from './question.model';
+import { Question } from '../question.model';
 
 @Component({
   selector: 'app-question-detail',

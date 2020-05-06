@@ -1,5 +1,5 @@
 <mat-list>
-  <mat-list-item *ngFor="let question of questions">
+  <mat-list-item *ngFor="let question of questions" [routerLink]="['/questions', question._id]">
 		<i mat-list-icon class="{{question.icon === 'none' ? 'material-icons' : question.icon}} icon">{{question.icon === 'none' ? 'help' : ''}}</i>
     <h3 mat-line>{{question.title}}</h3>
     <p mat-line>
@@ -7,3 +7,4 @@
 		</p>
   </mat-list-item>
 </mat-list>
+<button [routerLink]="['new']" class="add-question" mat-fab color="accent">+</button>
