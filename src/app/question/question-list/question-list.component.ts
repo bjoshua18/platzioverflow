@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Question } from '../../question.model';
+import { Component } from '@angular/core';
+import { Question } from '../question.model';
 
 const q = new Question(
   '¿Cómo reutilizo un componente en Android?',
