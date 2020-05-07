@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Question } from '../models/question.model';
 import { environment } from 'src/environments/environment';
 import urljoin from 'url-join';
@@ -29,6 +29,11 @@ export class QuestionService {
       .toPromise()
       .then(response => response)
       .catch(this.handlerError);
+  }
+
+  addQuestion(question: Question) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.post(this.questionsUrl, question, { headers });
   }
 
   handlerError(error: any) {

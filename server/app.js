@@ -1,9 +1,11 @@
 import express from 'express'
-import {
-  question
-} from './routes'
+import bodyParser from 'body-parser'
+import { question } from './routes'
 
 const app = express()
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configurar cabeceras y cors
 app.use((req, res, next) => {
