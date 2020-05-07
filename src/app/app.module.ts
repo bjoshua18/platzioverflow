@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SigninScreenComponent } from './auth/signin/signin-screen.component';
 import { SignupScreenComponent } from './auth/signup/signup-screen.component';
 import { QuestionModule } from './question/question.module';
+import { CoreModule } from './core/core.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { QuestionModule } from './question/question.module';
     MomentModule,
     FormsModule,
     ReactiveFormsModule,
-    QuestionModule
+    QuestionModule,
+    CoreModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

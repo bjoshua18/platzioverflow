@@ -1,4 +1,4 @@
-import { Answer } from '../answer/answer.model';
+import { Answer } from './answer.model';
 
 export class Question {
 

@@ -20,7 +20,8 @@ const question = {
 const questions = new Array(10).fill(question)
 
 // /api/questions
-router.get('/', (req, res) => res.status(200).json(questions))
+// router.get('/', (req, res) => res.status(200).json(questions))
+router.get('/', (req, res) => setTimeout(() => res.status(200).json(questions), 2000))
 
 // /api/questions/:id
 router.get('/:id', (req, res) => res.status(200).json(question))

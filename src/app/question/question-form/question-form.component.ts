@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Question } from '../question.model';
+import { Question } from '../../core/models/question.model';
 import icons from '../icons';
 
 @Component({
