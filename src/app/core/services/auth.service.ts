@@ -43,6 +43,12 @@ export class AuthService {
     this.router.navigateByUrl('/');
   }
 
+  logout = () => {
+    localStorage.clear();
+    this.currentUser = null;
+    this.router.navigateByUrl('/');
+  }
+
   isLoggedIn() {
     return localStorage.getItem('token') !== null;
   }
