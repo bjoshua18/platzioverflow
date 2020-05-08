@@ -16,5 +16,6 @@ app.use((req, res, next) => {
 })
 
 app.use('/api/questions', question)
+app.use('/api/auth', auth)
 
 export default app
