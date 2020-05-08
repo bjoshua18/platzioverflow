@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Question } from '../../core/models/question.model';
-import { QuestionService } from 'src/app/core/services/question.service';
+import { QuestionService } from 'src/app/question/question.service';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

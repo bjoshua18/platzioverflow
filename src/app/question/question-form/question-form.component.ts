@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Question } from '../../core/models/question.model';
 import icons from '../icons';
-import { QuestionService } from 'src/app/core/services/question.service';
+import { QuestionService } from 'src/app/question/question.service';
 import { Router } from '@angular/router';
 
 @Component({

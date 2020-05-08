@@ -1,6 +1,6 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import { question } from './routes'
+import { question, auth } from './routes'
 
 const app = express()
 

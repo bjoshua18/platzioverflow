@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
-import { Question } from '../models/question.model';
+import { Question } from '../core/models/question.model';
 import { environment } from 'src/environments/environment';
 import urljoin from 'url-join';
-import { Answer } from '../models/answer.model';
+import { Answer } from '../core/models/answer.model';
 
 @Injectable({
   providedIn: 'root'

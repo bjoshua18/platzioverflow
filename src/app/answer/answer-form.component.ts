@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Answer } from '../core/models/answer.model';
 import { Question } from '../core/models/question.model';
-import { QuestionService } from '../core/services/question.service';
+import { QuestionService } from '../question/question.service';
 import SweetScroll from 'sweet-scroll';
 
 @Component({
