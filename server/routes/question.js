@@ -1,45 +1,21 @@
 import { Router } from "express"
+import {
+  required,
+  questionMiddleware,
+  questionsMiddleware,
+  questions
+} from '../middleware'
 
 const router = Router()
 
-const currentUser = {
-  firstName: 'Byron',
-  lastName: 'Bustamante',
-  email: 'byron@email.com',
-  password: 'byron'
-}
-
-function questionMiddleware(req, res, next) {
-  const { id } = req.params
-  req.question = questions.find(({_id}) => _id === +id)
-  next()
-}
-
-function userMiddleware(req, res, next) {
-  req.user = currentUser
-  next()
-}
-
-const question = {
-  _id: 1,
-  title: '¿Cómo reutilizo un componente en Android?',
-  description: 'Miren, esta es mi pregunta...',
-  createdAt: new Date(),
-  icon: 'devicon-android-plain',
-  answers: [],
-  user: currentUser
-}
-
-const questions = new Array(10).fill(question)
-
 // /api/questions
-router.get('/', (req, res) => res.status(200).json(questions))
+router.get('/', questionsMiddleware, (req, res) => res.status(200).json(req.questions))
 // /api/questions/:id
 router.get('/:id', questionMiddleware, (req, res) => {
   res.status(200).json(req.question)
 })
 // /api/questions
-router.post('/', userMiddleware, (req, res) => {
+router.post('/', required, (req, res) => {
   const question = {
     ...req.body,
     _id: +new Date(),
@@ -51,8 +27,8 @@ router.post('/', userMiddleware, (req, res) => {
 
 router.post(
   '/:id/answers',
+  required,
   questionMiddleware,
-  userMiddleware,
   (req, res) => {
     const answer = req.body
     const q = req.question

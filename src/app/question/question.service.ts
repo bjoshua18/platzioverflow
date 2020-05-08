@@ -34,11 +34,12 @@ export class QuestionService {
 
   addQuestion(question: Question) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.questionsUrl, question, { headers });
+    const url = `${this.questionsUrl}${this.getToken()}`;
+    return this.http.post(url, question, { headers });
   }
 
   addAnswer(data: Answer) {
-    const url: string = urljoin(this.questionsUrl, data.question._id + '', 'answers');
+    const url: string = urljoin(this.questionsUrl, data.question._id + '', 'answers') + this.getToken();
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const answer = {
       description: data.description,
@@ -47,6 +48,11 @@ export class QuestionService {
       }
     };
     return this.http.post(url, answer, { headers });
+  }
+
+  getToken() {
+    const token = localStorage.getItem('token');
+    return `?token=${token}`;
   }
 
   handlerError(error: any) {

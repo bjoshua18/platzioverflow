@@ -36,7 +36,7 @@ export class SigninScreenComponent implements OnInit {
             this.authService.login(data);
             return data;
           },
-          error => console.error(error)
+          this.authService.handleError
         );
     }
   }

@@ -43,7 +43,7 @@ export class SignupScreenComponent implements OnInit {
                 this.authService.login(data);
                 return data;
               },
-              error => console.error(error)
+              this.authService.handleError
             );
         } else {
           console.log('Las contraseñas no coinciden');

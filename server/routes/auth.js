@@ -1,23 +1,9 @@
 import { Router } from 'express'
-import Debug from 'debug'
 import jwt from 'jsonwebtoken'
+import { secret } from '../config'
+import { findUserByEmail, users } from '../middleware'
 
 const router = Router()
-const debug =new Debug('platzi-overflow:auth')
-
-const secret = 'clavesecreta'
-
-const users = [
-  {
-    _id: '123',
-    firstName: 'Byron',
-    lastName: 'Bustamante',
-    email: 'byron@email.com',
-    password: 'byron'
-  }
-]
-
-const findUserByEmail = email => users.find(user => user.email === email)
 
 const comparePasswords = (providedPassword, userPassword) => providedPassword === userPassword
 
