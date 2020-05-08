@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Question } from '../models/question.model';
 import { environment } from 'src/environments/environment';
 import urljoin from 'url-join';
+import { Answer } from '../models/answer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,18 @@ export class QuestionService {
   addQuestion(question: Question) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post(this.questionsUrl, question, { headers });
+  }
+
+  addAnswer(data: Answer) {
+    const url: string = urljoin(this.questionsUrl, data.question._id + '', 'answers');
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const answer = {
+      description: data.description,
+      question: {
+        _id: data.question._id
+      }
+    };
+    return this.http.post(url, answer, { headers });
   }
 
   handlerError(error: any) {

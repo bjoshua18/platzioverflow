@@ -31,6 +31,7 @@
     "moment": "^2.24.0",
     "ngx-moment": "^3.5.0",
     "rxjs": "~6.5.5",
+    "sweet-scroll": "^4.0.0",
     "tslib": "^1.10.0",
     "url-join": "^4.0.1",
     "zone.js": "~0.10.2"
