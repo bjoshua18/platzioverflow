@@ -1,8 +1,11 @@
-import http from 'http'
 import Debug from 'debug'
 import app from './app'
+import { startConnection } from './database'
 
-const PORT = 3000
-const debug = new Debug('platzi-overflow:root')
+async function main() {
+  const debug = new Debug('platzi-overflow:root')
+  startConnection()
+  await app.listen(app.get('port'), () => debug(`Server running at port ${app.get('port')}`))
+}
 
-app.listen(PORT, () => debug(`Server running at port ${PORT}`))
+main()

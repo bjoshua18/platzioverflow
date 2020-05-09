@@ -1,18 +1,27 @@
 import { Router } from "express"
-import {
-  required,
-  questionMiddleware,
-  questionsMiddleware,
-  questions
-} from '../middleware'
+import { required } from '../middleware'
+import { question } from '../db-api'
+import { handleError } from "../utils"
 
 const router = Router()
 
 // /api/questions
-router.get('/', questionsMiddleware, (req, res) => res.status(200).json(req.questions))
+router.get('/', async (req, res) => {
+  try {
+    const questions = await question.findAll()
+    res.status(200).json(questions)
+  } catch (error) {
+    handleError(error, res)
+  }
+})
 // /api/questions/:id
-router.get('/:id', questionMiddleware, (req, res) => {
-  res.status(200).json(req.question)
+router.get('/:id', async (req, res) => {
+  try {
+    const q = await question.findById(req.params.id)
+    res.status(200).json(q)
+  } catch (error) {
+    handleError(error, res)
+  }
 })
 // /api/questions
 router.post('/', required, (req, res) => {
@@ -28,7 +37,6 @@ router.post('/', required, (req, res) => {
 router.post(
   '/:id/answers',
   required,
-  questionMiddleware,
   (req, res) => {
     const answer = req.body
     const q = req.question

@@ -4,6 +4,10 @@ import { question, auth } from './routes'
 
 const app = express()
 
+// Settings
+app.set('port', process.env.PORT || 3000)
+
+// Middlewares
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -15,6 +19,7 @@ app.use((req, res, next) => {
   next()
 })
 
+// Routes
 app.use('/api/questions', question)
 app.use('/api/auth', auth)
 

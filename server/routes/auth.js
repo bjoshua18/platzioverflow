@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import jwt from 'jsonwebtoken'
 import { secret } from '../config'
-import { findUserByEmail, users } from '../middleware'
+import { User } from '../models'
 
 const router = Router()
 
