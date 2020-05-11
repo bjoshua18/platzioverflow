@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Question } from '../../core/models/question.model';
 import { QuestionService } from 'src/app/question/question.service';
 
@@ -9,6 +9,8 @@ import { QuestionService } from 'src/app/question/question.service';
   providers: [QuestionService]
 })
 export class QuestionListComponent implements OnInit {
+
+  @Input() sort = '-createdAt';
   questions: Question[];
   loading = true;
 
@@ -21,7 +23,7 @@ export class QuestionListComponent implements OnInit {
   }
 
   fetchQuestions() {
-    this.questionService.getQuestions()
+    this.questionService.getQuestions(this.sort)
       .then((questions: Question[]) => {
         this.questions = questions;
         this.loading = false;

@@ -10,13 +10,15 @@ import { AnswerFormComponent } from '../answer/answer-form.component';
 // Angular Material
 import { MaterialModule } from '../material/material.module';
 import 'hammerjs';
+import { QuestionScreenComponent } from './question-screen/question-screen.component';
 
 @NgModule({
   declarations: [
     QuestionDetailComponent,
     QuestionListComponent,
     QuestionFormComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    QuestionScreenComponent
   ],
   imports: [
     CommonModule,

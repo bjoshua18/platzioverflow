@@ -1,13 +1,13 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { QuestionListComponent } from './question-list/question-list.component';
+import { QuestionScreenComponent } from './question-screen/question-screen.component';
 import { QuestionDetailComponent } from './question-detail/question-detail.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: QuestionListComponent
+    component: QuestionScreenComponent
   },
   {
     path: 'new',

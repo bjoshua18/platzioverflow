@@ -1,17 +1,18 @@
 import { Router } from 'express'
+import Debug from 'debug'
 import jwt from 'jsonwebtoken'
 import { secret } from '../config'
 import { User } from '../models'
+import { hashSync as hash, compareSync as comparePasswords } from 'bcrypt'
 
 const router = Router()
-
-const comparePasswords = (providedPassword, userPassword) => providedPassword === userPassword
+const debug = new Debug('platzi-overflow:auth')
 
 const createToken = user => jwt.sign({ user }, secret, { expiresIn: 86400 })
 
-router.post('/signin', (req, res, next) => {
+router.post('/signin', async (req, res, next) => {
   const { email, password } = req.body
-  const user = findUserByEmail(email)
+  const user = await User.findOne({email})
 
   if (!user) {
     debug(`User with emmail ${email} not found`)
@@ -36,13 +37,16 @@ router.post('/signin', (req, res, next) => {
   })
 })
 
-router.post('/signup', (req, res, next) => {
-  const user = {
-    _id: +new Date(),
-    ...req.body
-  }
-  debug(`Creating new user: ${user}`)
-  users.push(user)
+router.post('/signup', async (req, res, next) => {
+  const { firstName, lastName, email, password } = req.body
+  const u = new User({
+    firstName,
+    lastName,
+    email,
+    password: hash(password, 10)
+  })
+  const user = await u.save()
+  debug(`Creating new user: ${u}`)
   const token = createToken(user)
   res.status(201).json({
     message: 'User created',

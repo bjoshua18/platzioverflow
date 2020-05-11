@@ -28,7 +28,7 @@ export class AuthService {
 
   signup(user: User) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(urljoin(this.usersUrl, 'signup'), user, { headers })
+    return this.http.post(urljoin(this.usersUrl, 'signup'), user, { headers });
   }
 
   signin(user: User) {

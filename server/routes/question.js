@@ -1,49 +1,62 @@
 import { Router } from "express"
-import { required } from '../middleware'
+import { required, questionMiddleware } from '../middleware'
 import { question } from '../db-api'
 import { handleError } from "../utils"
+import { User } from "../models"
 
 const router = Router()
 
 // /api/questions
 router.get('/', async (req, res) => {
   try {
-    const questions = await question.findAll()
+    const { sort } = req.query
+    const questions = await question.findAll(sort)
     res.status(200).json(questions)
   } catch (error) {
     handleError(error, res)
   }
 })
 // /api/questions/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id', questionMiddleware, async (req, res) => {
   try {
-    const q = await question.findById(req.params.id)
-    res.status(200).json(q)
+    res.status(200).json(req.question)
   } catch (error) {
     handleError(error, res)
   }
 })
 // /api/questions
-router.post('/', required, (req, res) => {
-  const question = {
-    ...req.body,
-    _id: +new Date(),
-    user: req.user
+router.post('/', required, async (req, res) => {
+  const { title, description, icon } = req.body
+  const q = {
+    title,
+    description,
+    icon,
+    user: req.user._id
   }
-  questions.push(question)
-  res.status(201).json(question)
+  try {
+    const savedQuestion = await question.create(q)
+    res.status(201).json(savedQuestion)
+  } catch (error) {
+    handleError(error, res)
+  }
 })
 
 router.post(
   '/:id/answers',
   required,
-  (req, res) => {
-    const answer = req.body
+  questionMiddleware,
+  async (req, res) => {
+    const a = req.body
     const q = req.question
-    answer.createdAt = new Date()
-    answer.user = req.user
-    q.answers.push(answer)
-    res.status(201).json(answer)
-})
+    a.createdAt = new Date()
+    a.user = new User(req.user)
+    try {
+      const savedAnswer = await question.createAnswer(q, a)
+      res.status(201).json(savedAnswer)
+    } catch (error) {
+      handleError(error, res)
+    }
+  }
+)
 
 export default router
